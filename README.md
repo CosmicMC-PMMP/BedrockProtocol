@@ -1,5 +1,5 @@
 # BedrockProtocol
-[![CI](https://github.com/axolotl-pm/BedrockProtocol/actions/workflows/ci.yml/badge.svg)](https://github.com/axolotl-pm/BedrockProtocol/actions/workflows/ci.yml)
+[![CI](https://github.com/CosmicMC-PMMP/BedrockProtocol/actions/workflows/ci.yml/badge.svg)](https://github.com/CosmicMC-PMMP/BedrockProtocol/actions/workflows/ci.yml)
 
 An implementation of the Minecraft: Bedrock Edition protocol in PHP
 
