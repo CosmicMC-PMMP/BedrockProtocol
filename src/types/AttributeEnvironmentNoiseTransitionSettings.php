@@ -25,13 +25,10 @@ use pocketmine\network\mcpe\protocol\types\camera\CameraSetInstructionEaseType;
  */
 final class AttributeEnvironmentNoiseTransitionSettings{
 
-	/**
-	 * @see CameraSetInstructionEaseType
-	 */
 	public function __construct(
 		private int $totalTransitionTicks,
 		private int $currentTransitionTicks,
-		private int $easeType,
+		private CameraSetInstructionEaseType $easeType,
 		private string $clockName,
 		private int $localTransitionTicks,
 		private string $noiseName,
@@ -42,10 +39,7 @@ final class AttributeEnvironmentNoiseTransitionSettings{
 
 	public function getCurrentTransitionTicks() : int{ return $this->currentTransitionTicks; }
 
-	/**
-	 * @see CameraSetInstructionEaseType
-	 */
-	public function getEaseType() : int{ return $this->easeType; }
+	public function getEaseType() : CameraSetInstructionEaseType{ return $this->easeType; }
 
 	public function getClockName() : string{ return $this->clockName; }
 
@@ -58,7 +52,7 @@ final class AttributeEnvironmentNoiseTransitionSettings{
 	public static function read(ByteBufferReader $in) : self{
 		$totalTransitionTicks = VarInt::readUnsignedInt($in);
 		$currentTransitionTicks = VarInt::readUnsignedInt($in);
-		$easeType = VarInt::readSignedInt($in);
+		$easeType = CameraSetInstructionEaseType::fromOrdinal(VarInt::readSignedInt($in));
 		$clockName = CommonTypes::getString($in);
 		$localTransitionTicks = VarInt::readUnsignedInt($in);
 		$noiseName = CommonTypes::getString($in);
@@ -78,7 +72,7 @@ final class AttributeEnvironmentNoiseTransitionSettings{
 	public function write(ByteBufferWriter $out) : void{
 		VarInt::writeUnsignedInt($out, $this->totalTransitionTicks);
 		VarInt::writeUnsignedInt($out, $this->currentTransitionTicks);
-		VarInt::writeSignedInt($out, $this->easeType);
+		VarInt::writeSignedInt($out, $this->easeType->toOrdinal());
 		CommonTypes::putString($out, $this->clockName);
 		VarInt::writeUnsignedInt($out, $this->localTransitionTicks);
 		CommonTypes::putString($out, $this->noiseName);
