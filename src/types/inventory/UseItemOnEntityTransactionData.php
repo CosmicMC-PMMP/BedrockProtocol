@@ -95,7 +95,7 @@ class UseItemOnEntityTransactionData extends TransactionData{
 		HandSlot $hand,
 		ItemStackWrapper $itemInHand,
 		Vector3 $playerPosition,
-		Vector3 $clickPosition
+		Vector3 $clickPosition,
 	) : self{
 		$result = new self;
 		$result->actorRuntimeId = $actorRuntimeId;
