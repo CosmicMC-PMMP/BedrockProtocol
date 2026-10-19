@@ -88,7 +88,15 @@ class UseItemOnEntityTransactionData extends TransactionData{
 	/**
 	 * @generate-create-func
 	 */
-	private static function initSelf(int $actorRuntimeId, int $actionType, int $hotbarSlot, HandSlot $hand, ItemStackWrapper $itemInHand, Vector3 $playerPosition, Vector3 $clickPosition) : self{
+	private static function initSelf(
+		int $actorRuntimeId,
+		int $actionType,
+		int $hotbarSlot,
+		HandSlot $hand,
+		ItemStackWrapper $itemInHand,
+		Vector3 $playerPosition,
+		Vector3 $clickPosition
+	) : self{
 		$result = new self;
 		$result->actorRuntimeId = $actorRuntimeId;
 		$result->actionType = $actionType;
