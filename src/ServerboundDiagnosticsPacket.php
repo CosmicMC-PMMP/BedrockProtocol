@@ -171,7 +171,7 @@ class ServerboundDiagnosticsPacket extends DataPacket implements ServerboundPack
 		$this->memoryCategoryValues = CommonTypes::readList($in, MemoryCategoryCounter::read(...));
 		$this->entityDiagnostics = CommonTypes::readList($in, EntityDiagnosticTimingInfo::read(...));
 		$this->systemDiagnostics = CommonTypes::readList($in, SystemDiagnosticTimingInfo::read(...));
-		$this->systemCategories = CommonTypes::readOptional($in, fn() => CommonTypes::readList($in, SystemCategory::read(...)));
+		$this->systemCategories = CommonTypes::readOptional($in, static fn(ByteBufferReader $in) => CommonTypes::readList($in, SystemCategory::read(...)));
 		$this->whiskerScopes = CommonTypes::readList($in, WhiskerScopeDataSummary::read(...));
 	}
 

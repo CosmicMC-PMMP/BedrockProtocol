@@ -130,7 +130,7 @@ class AddPlayerPacket extends DataPacket implements ClientboundPacket{
 			$this->links[$i] = CommonTypes::getEntityLink($in);
 		}
 
-		$this->passengerBlockData = CommonTypes::readOptional($in, fn(ByteBufferReader $in) => PassengerOfBlockData::read($in));
+		$this->passengerBlockData = CommonTypes::readOptional($in, PassengerOfBlockData::read(...));
 		$this->deviceId = CommonTypes::getString($in);
 		$this->buildPlatform = LE::readSignedInt($in);
 	}
@@ -157,7 +157,7 @@ class AddPlayerPacket extends DataPacket implements ClientboundPacket{
 			CommonTypes::putEntityLink($out, $link);
 		}
 
-		CommonTypes::writeOptional($out, $this->passengerBlockData, fn(ByteBufferWriter $out, PassengerOfBlockData $data) => $data->write($out));
+		CommonTypes::writeOptional($out, $this->passengerBlockData, static fn(ByteBufferWriter $out, PassengerOfBlockData $data) => $data->write($out));
 		CommonTypes::putString($out, $this->deviceId);
 		LE::writeSignedInt($out, $this->buildPlatform);
 	}

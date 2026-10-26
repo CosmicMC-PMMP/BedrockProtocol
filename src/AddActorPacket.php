@@ -122,7 +122,7 @@ class AddActorPacket extends DataPacket implements ClientboundPacket{
 		$this->syncedProperties = PropertySyncData::read($in);
 
 		$this->links = CommonTypes::readList($in, CommonTypes::getEntityLink(...));
-		$this->passengerBlockData = CommonTypes::readOptional($in, fn(ByteBufferReader $in) => PassengerOfBlockData::read($in));
+		$this->passengerBlockData = CommonTypes::readOptional($in, PassengerOfBlockData::read(...));
 	}
 
 	protected function encodePayload(ByteBufferWriter $out) : void{
@@ -147,7 +147,7 @@ class AddActorPacket extends DataPacket implements ClientboundPacket{
 		$this->syncedProperties->write($out);
 
 		CommonTypes::writeList($out, $this->links, CommonTypes::putEntityLink(...));
-		CommonTypes::writeOptional($out, $this->passengerBlockData, fn(ByteBufferWriter $out, PassengerOfBlockData $data) => $data->write($out));
+		CommonTypes::writeOptional($out, $this->passengerBlockData, static fn(ByteBufferWriter $out, PassengerOfBlockData $data) => $data->write($out));
 	}
 
 	public function handle(PacketHandlerInterface $handler) : bool{

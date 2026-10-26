@@ -40,7 +40,7 @@ class PartyChangedPacket extends DataPacket implements ServerboundPacket{
 	}
 
 	protected function encodePayload(ByteBufferWriter $out) : void{
-		CommonTypes::writeOptional($out, $this->partyInfo, fn(ByteBufferWriter $out, PlayerPartyInfo $info) => $info->write($out));
+		CommonTypes::writeOptional($out, $this->partyInfo, static fn(ByteBufferWriter $out, PlayerPartyInfo $info) => $info->write($out));
 	}
 
 	public function handle(PacketHandlerInterface $handler) : bool{

@@ -54,7 +54,7 @@ class ClientboundMatchmakingStatePacket extends DataPacket implements Clientboun
 	protected function encodePayload(ByteBufferWriter $out) : void{
 		Byte::writeUnsigned($out, $this->state->toOrdinal());
 		CommonTypes::putString($out, $this->destinationName);
-		CommonTypes::writeOptional($out, $this->options, fn(ByteBufferWriter $out, MatchmakingStateOptions $options) => $options->write($out));
+		CommonTypes::writeOptional($out, $this->options, static fn(ByteBufferWriter $out, MatchmakingStateOptions $options) => $options->write($out));
 	}
 
 	protected function decodePayload(ByteBufferReader $in) : void{
